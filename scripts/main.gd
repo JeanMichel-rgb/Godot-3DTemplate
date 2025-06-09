@@ -72,13 +72,17 @@ func update_screen_size() -> void:
 
 func update_GUI() -> void:
 	#region GUI's scale
-	var ratio : float = float(window.size.x)/float(initial_window_size.x)
+	var ratio : float = float(window.size.x) / float(initial_window_size.x)
 	GUI.scale = Vector2(1,1) * ratio
 	#endregion GUI's scale
 	
 	#region Store node's ID
 	#store here all Button's ID
 	var buttons : Array = [
+		
+	]
+	#store here all Flat Button's ID
+	var flat_buttons : Array = [
 		
 	]
 	#store here all OptionButton's ID
@@ -226,10 +230,43 @@ func update_GUI() -> void:
 	#endregion Background
 	#endregion Create control node's theme
 	
+	var flat_button_theme : Theme = Theme.new()
+	
+	#region Text
+	flat_button_theme.set_font("font", "Button", font)
+	flat_button_theme.set_color("font_color", "Button", font_color)
+	flat_button_theme.set_color("font_disabled_color", "Button", disabled_font_color)
+	flat_button_theme.set_color("font_focus_color", "Button", font_color)
+	flat_button_theme.set_color("font_hover_color", "Button", font_color*1.5)
+	flat_button_theme.set_color("font_pressed_color", "Button", font_selected_color)
+	flat_button_theme.set_color("font_outline_color", "Button", font_outline_color)
+	flat_button_theme.set_constant("outline_size", "Button", font_outline_size)
+	#endregion Text
+	
+	#region Background
+	#region Create the StyleBoxFlat
+	_StyleBoxFlat = StyleBoxFlat.new()
+	_StyleBoxFlat.bg_color = Color(0,0,0,0)
+	#endregion Create the StyleBoxFlat
+	
+	#region Add StyleBoxFlat to flat_button_theme
+	flat_button_theme.set_stylebox("disabled", "Button", _StyleBoxFlat)
+	flat_button_theme.set_stylebox("normal", "Button", _StyleBoxFlat)
+	flat_button_theme.set_stylebox("focus", "Button", _StyleBoxFlat)
+	flat_button_theme.set_stylebox("hover", "Button", _StyleBoxFlat)
+	flat_button_theme.set_stylebox("hover_pressed", "Button", _StyleBoxFlat)
+	flat_button_theme.set_stylebox("pressed", "Button", _StyleBoxFlat)
+	#endregion Add StyleBoxFlat to flat_button_theme
+	#endregion Background
+	
 	#region Add theme
 	for button in buttons:
 		button.theme = control_node_theme
 		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	
+	for flat_button in flat_buttons:
+		flat_button.theme = flat_button_theme
+		flat_button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	
 	for option_button in option_buttons:
 		option_button.theme = control_node_theme
@@ -270,6 +307,7 @@ func update_GUI() -> void:
 	#create a dictionary with all nodes that can be focused
 	var control_nodes : Dictionary = {
 		"buttons" = buttons,
+		"flat_buttons" = flat_buttons,
 		"option_buttons" = option_buttons,
 		"check_buttons" = check_buttons,
 		"check_boxs" = check_boxs,
