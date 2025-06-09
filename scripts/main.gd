@@ -1,6 +1,12 @@
 extends Node
 
 #region Variables
+#region Player
+@export_category("Player")
+@export var mouse_sensibility : float
+@export var player_speed : float
+#endregion Player
+
 #region GUI
 @export_category("Text")
 @export var font : Font
@@ -29,6 +35,8 @@ extends Node
 #region NodesID
 @onready var GUI : Node2D = get_node("GUI")
 @onready var menus : Node2D = get_node("GUI/menus")
+@onready var world : Node3D = get_node("world")
+@onready var player : CharacterBody3D = world.get_node("player")
 #endregion NodesID
 
 #region Window
@@ -56,6 +64,8 @@ func update() -> void:
 
 func update_variables():
 	global_mouse_position = GUI.get_global_mouse_position()
+	player.mouse_sensibility = mouse_sensibility
+	player.SPEED = player_speed
 
 func update_screen_size() -> void:
 	window.size.y = window.size.x * window_ratio

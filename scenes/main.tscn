@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://wop1epi83rku"]
+[gd_scene load_steps=4 format=3 uid="uid://wop1epi83rku"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rwuwp"]
+[ext_resource type="PackedScene" uid="uid://bcy1m5mku5pcs" path="res://scenes/player.tscn" id="2_ok3j6"]
 
 [sub_resource type="SystemFont" id="SystemFont_gyhpv"]
 font_names = PackedStringArray("BN Machine", "Year supply of fairy cakes", "Ethnocentric")
@@ -25,3 +26,5 @@ GUI_corner_radius = Vector4i(15, 5, 5, 10)
 [node name="menus" type="Node2D" parent="GUI"]
 
 [node name="world" type="Node3D" parent="."]
+
+[node name="player" parent="world" instance=ExtResource("2_ok3j6")]
