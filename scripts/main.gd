@@ -230,6 +230,7 @@ func update_GUI() -> void:
 	#endregion Background
 	#endregion Create control node's theme
 	
+	#region Create flat button's theme
 	var flat_button_theme : Theme = Theme.new()
 	
 	#region Text
@@ -258,6 +259,7 @@ func update_GUI() -> void:
 	flat_button_theme.set_stylebox("pressed", "Button", _StyleBoxFlat)
 	#endregion Add StyleBoxFlat to flat_button_theme
 	#endregion Background
+	#endregion Create flat button's theme
 	
 	#region Add theme
 	for button in buttons:
